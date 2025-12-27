@@ -1,9 +1,7 @@
 import { listProducts } from "@lib/data/products"
 import { HttpTypes } from "@medusajs/types"
-import { Text } from "@medusajs/ui"
-
-import InteractiveLink from "@modules/common/components/interactive-link"
-import ProductPreview from "@modules/products/components/product-preview"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import ProductCard from "../product-card"
 
 export default async function ProductRail({
   collection,
@@ -19,29 +17,32 @@ export default async function ProductRail({
     queryParams: {
       collection_id: collection.id,
       fields: "*variants.calculated_price",
+      limit: 4,
     },
   })
 
-  if (!pricedProducts) {
+  if (!pricedProducts || pricedProducts.length === 0) {
     return null
   }
 
   return (
-    <div className="content-container py-12 small:py-24">
-      <div className="flex justify-between mb-8">
-        <Text className="txt-xlarge">{collection.title}</Text>
-        <InteractiveLink href={`/collections/${collection.handle}`}>
-          View all
-        </InteractiveLink>
-      </div>
-      <ul className="grid grid-cols-2 small:grid-cols-3 gap-x-6 gap-y-24 small:gap-y-36">
-        {pricedProducts &&
-          pricedProducts.map((product) => (
-            <li key={product.id}>
-              <ProductPreview product={product} region={region} isFeatured />
-            </li>
+    <section className="py-24 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-serif font-bold text-[#2c3e2e] mb-4">
+            Featured Products
+          </h2>
+          <p className="text-gray-500 max-w-xl mx-auto">
+            Our range of gift boxes are elegantly packed, gorgeous to look at, and packed with the freshest Indian teas.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {pricedProducts.map((product) => (
+            <ProductCard key={product.id} product={product} region={region} />
           ))}
-      </ul>
-    </div>
+        </div>
+      </div>
+    </section>
   )
 }

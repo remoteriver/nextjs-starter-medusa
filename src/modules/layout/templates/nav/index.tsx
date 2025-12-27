@@ -1,66 +1,80 @@
 import { Suspense } from "react"
-
-import { listRegions } from "@lib/data/regions"
-import { listLocales } from "@lib/data/locales"
-import { getLocale } from "@lib/data/locale-actions"
-import { StoreRegion } from "@medusajs/types"
+import { FaChevronDown, FaMagnifyingGlass, FaRegUser, FaRegHeart, FaBagShopping } from "react-icons/fa6"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
-import SideMenu from "@modules/layout/components/side-menu"
 
-export default async function Nav() {
-  const [regions, locales, currentLocale] = await Promise.all([
-    listRegions().then((regions: StoreRegion[]) => regions),
-    listLocales(),
-    getLocale(),
-  ])
-
+export default function Nav() {
   return (
-    <div className="sticky top-0 inset-x-0 z-50 group">
-      <header className="relative h-16 mx-auto border-b duration-200 bg-white border-ui-border-base">
-        <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular">
-          <div className="flex-1 basis-0 h-full flex items-center">
-            <div className="h-full">
-              <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+    <>
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 transition-all duration-300">
+        <div className="container mx-auto px-4 py-5">
+          <div className="flex justify-between items-center">
+            {/* Search */}
+            <div className="hidden md:flex items-center w-1/4">
+              <button className="text-gray-500 hover:text-lime-700 transition-colors">
+                <FaMagnifyingGlass className="text-lg" />
+              </button>
+              <span className="ml-3 text-sm text-gray-500 cursor-pointer hover:text-lime-700">Search</span>
             </div>
-          </div>
 
-          <div className="flex items-center h-full">
-            <LocalizedClientLink
-              href="/"
-              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
-              data-testid="nav-store-link"
-            >
-              Medusa Store
-            </LocalizedClientLink>
-          </div>
-
-          <div className="flex items-center gap-x-6 h-full flex-1 basis-0 justify-end">
-            <div className="hidden small:flex items-center gap-x-6 h-full">
+            {/* Logo */}
+            <div className="flex-1 text-center">
               <LocalizedClientLink
-                className="hover:text-ui-fg-base"
-                href="/account"
-                data-testid="nav-account-link"
+                href="/"
+                className="text-4xl font-serif font-bold text-[#2c3e2e] tracking-tight"
               >
-                Account
+                teapoz<span className="text-lime-600">.</span>
               </LocalizedClientLink>
             </div>
-            <Suspense
-              fallback={
-                <LocalizedClientLink
-                  className="hover:text-ui-fg-base flex gap-2"
-                  href="/cart"
-                  data-testid="nav-cart-link"
-                >
-                  Cart (0)
-                </LocalizedClientLink>
-              }
-            >
-              <CartButton />
-            </Suspense>
+
+            {/* Actions */}
+            <div className="w-1/4 flex justify-end items-center gap-6">
+              <LocalizedClientLink
+                href="/account"
+                className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-lime-700 transition-colors"
+              >
+                <FaRegUser className="text-lg" />
+                <span className="hidden lg:inline">Login / Register</span>
+              </LocalizedClientLink>
+              <LocalizedClientLink
+                href="#"
+                className="text-gray-600 hover:text-lime-700 transition-colors relative"
+              >
+                <FaRegHeart className="text-lg" />
+                <span className="absolute -top-2 -right-2 bg-lime-600 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">0</span>
+              </LocalizedClientLink>
+              <div className="text-gray-600 hover:text-lime-700 transition-colors">
+                <Suspense fallback={
+                  <LocalizedClientLink href="/cart" className="relative">
+                    <FaBagShopping className="text-lg" />
+                    <span className="absolute -top-2 -right-2 bg-lime-600 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">0</span>
+                  </LocalizedClientLink>
+                }>
+                  <CartButton />
+                </Suspense>
+              </div>
+            </div>
           </div>
-        </nav>
+
+          {/* Navigation */}
+          <nav className="flex justify-center gap-10 mt-6 text-sm font-medium uppercase tracking-wide text-gray-600">
+            <LocalizedClientLink href="/" className="text-lime-700 hover:text-lime-800">
+              Home <FaChevronDown className="inline text-[10px] ml-1" />
+            </LocalizedClientLink>
+            <LocalizedClientLink href="/store" className="hover:text-lime-700 transition-colors">
+              Shop <FaChevronDown className="inline text-[10px] ml-1" />
+            </LocalizedClientLink>
+            <LocalizedClientLink href="/store" className="hover:text-lime-700 transition-colors">Sale</LocalizedClientLink>
+            <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
+              Blog <FaChevronDown className="inline text-[10px] ml-1" />
+            </LocalizedClientLink>
+            <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
+              Pages <FaChevronDown className="inline text-[10px] ml-1" />
+            </LocalizedClientLink>
+            <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">Contact</LocalizedClientLink>
+          </nav>
+        </div>
       </header>
-    </div>
+    </>
   )
 }
