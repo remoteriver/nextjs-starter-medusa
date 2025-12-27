@@ -1,155 +1,214 @@
-import { listCategories } from "@lib/data/categories"
-import { listCollections } from "@lib/data/collections"
-import { Text, clx } from "@medusajs/ui"
+"use client"
 
+import { FaChevronUp, FaFacebook, FaTwitter, FaLinkedin } from "react-icons/fa6"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import MedusaCTA from "@modules/layout/components/medusa-cta"
 
-export default async function Footer() {
-  const { collections } = await listCollections({
-    fields: "*products",
-  })
-  const productCategories = await listCategories()
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" })
+}
 
+export default function Footer() {
   return (
-    <footer className="border-t border-ui-border-base w-full">
-      <div className="content-container flex flex-col w-full">
-        <div className="flex flex-col gap-y-6 xsmall:flex-row items-start justify-between py-40">
+    <footer className="bg-white border-t border-gray-200 w-full">
+      <div className="container mx-auto px-4 py-12">
+        {/* Main Footer Content */}
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
+          {/* Logo */}
           <div>
             <LocalizedClientLink
               href="/"
-              className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
+              className="text-3xl font-bold text-[#2c3e2e] tracking-tight inline-flex items-center"
             >
-              Medusa Store
+              teapoz<span className="text-lime-600">.</span>
             </LocalizedClientLink>
           </div>
-          <div className="text-small-regular gap-10 md:gap-x-16 grid grid-cols-2 sm:grid-cols-3">
-            {productCategories && productCategories?.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Categories
-                </span>
-                <ul
-                  className="grid grid-cols-1 gap-2"
-                  data-testid="footer-categories"
-                >
-                  {productCategories?.slice(0, 6).map((c) => {
-                    if (c.parent_category) {
-                      return
-                    }
 
-                    const children =
-                      c.category_children?.map((child) => ({
-                        name: child.name,
-                        handle: child.handle,
-                        id: child.id,
-                      })) || null
+          {/* ABOUT */}
+          <div className="flex flex-col gap-4">
+            <h3 className="font-bold text-[#2c3e2e] uppercase text-sm">About</h3>
+            <ul className="flex flex-col gap-3 text-sm text-gray-600">
+              <li>
+                <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
+                  Company
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
+                  FAQs
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
+                  Quality
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
+                  Gift Cards
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
+                  Contact
+                </LocalizedClientLink>
+              </li>
+            </ul>
+          </div>
 
-                    return (
-                      <li
-                        className="flex flex-col gap-2 text-ui-fg-subtle txt-small"
-                        key={c.id}
-                      >
-                        <LocalizedClientLink
-                          className={clx(
-                            "hover:text-ui-fg-base",
-                            children && "txt-small-plus"
-                          )}
-                          href={`/categories/${c.handle}`}
-                          data-testid="category-link"
-                        >
-                          {c.name}
-                        </LocalizedClientLink>
-                        {children && (
-                          <ul className="grid grid-cols-1 ml-3 gap-2">
-                            {children &&
-                              children.map((child) => (
-                                <li key={child.id}>
-                                  <LocalizedClientLink
-                                    className="hover:text-ui-fg-base"
-                                    href={`/categories/${child.handle}`}
-                                    data-testid="category-link"
-                                  >
-                                    {child.name}
-                                  </LocalizedClientLink>
-                                </li>
-                              ))}
-                          </ul>
-                        )}
-                      </li>
-                    )
-                  })}
-                </ul>
-              </div>
-            )}
-            {collections && collections.length > 0 && (
-              <div className="flex flex-col gap-y-2">
-                <span className="txt-small-plus txt-ui-fg-base">
-                  Collections
-                </span>
-                <ul
-                  className={clx(
-                    "grid grid-cols-1 gap-2 text-ui-fg-subtle txt-small",
-                    {
-                      "grid-cols-2": (collections?.length || 0) > 3,
-                    }
-                  )}
-                >
-                  {collections?.slice(0, 6).map((c) => (
-                    <li key={c.id}>
-                      <LocalizedClientLink
-                        className="hover:text-ui-fg-base"
-                        href={`/collections/${c.handle}`}
-                      >
-                        {c.title}
-                      </LocalizedClientLink>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-            <div className="flex flex-col gap-y-2">
-              <span className="txt-small-plus txt-ui-fg-base">Medusa</span>
-              <ul className="grid grid-cols-1 gap-y-2 text-ui-fg-subtle txt-small">
-                <li>
-                  <a
-                    href="https://github.com/medusajs"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://docs.medusajs.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    Documentation
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/medusajs/nextjs-starter-medusa"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="hover:text-ui-fg-base"
-                  >
-                    Source code
-                  </a>
-                </li>
-              </ul>
+          {/* SHOP */}
+          <div className="flex flex-col gap-4">
+            <h3 className="font-bold text-[#2c3e2e] uppercase text-sm">Shop</h3>
+            <ul className="flex flex-col gap-3 text-sm text-gray-600">
+              <li>
+                <LocalizedClientLink href="/store" className="hover:text-lime-700 transition-colors">
+                  Loose Leaf Tea
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="/store" className="hover:text-lime-700 transition-colors">
+                  Green Teas
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="/store" className="hover:text-lime-700 transition-colors">
+                  Packaged Teas
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="/store" className="hover:text-lime-700 transition-colors">
+                  Teaware
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="/store" className="hover:text-lime-700 transition-colors">
+                  Tea Gifts
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="/store" className="hover:text-lime-700 transition-colors">
+                  Iced Tea
+                </LocalizedClientLink>
+              </li>
+            </ul>
+          </div>
+
+          {/* HELP CENTER */}
+          <div className="flex flex-col gap-4">
+            <h3 className="font-bold text-[#2c3e2e] uppercase text-sm">Help Center</h3>
+            <ul className="flex flex-col gap-3 text-sm text-gray-600">
+              <li>
+                <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
+                  Delivery Information
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
+                  Terms & Conditions
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
+                  Returns & Refunds
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
+                  Privacy Notice
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
+                  Shopping
+                </LocalizedClientLink>
+              </li>
+              <li>
+                <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
+                  FAQs
+                </LocalizedClientLink>
+              </li>
+            </ul>
+          </div>
+
+          {/* GET IN TOUCH */}
+          <div className="flex flex-col gap-4">
+            <h3 className="font-bold text-[#2c3e2e] uppercase text-sm">Get in Touch</h3>
+            <div className="flex flex-col gap-3 text-sm text-gray-600">
+              <p>2972 Westheimer Rd. Santa Ana, Illinois 85486</p>
+              <p>
+                <a href="mailto:support@example.com" className="hover:text-lime-700 transition-colors">
+                  support@example.com
+                </a>
+              </p>
+              <p>Need help? Call us</p>
+              <p>
+                <a href="tel:+4065550120" className="text-lime-700 font-medium hover:text-lime-800 transition-colors">
+                  + (406) 555-0120
+                </a>
+              </p>
             </div>
           </div>
         </div>
-        <div className="flex w-full mb-16 justify-between text-ui-fg-muted">
-          <Text className="txt-compact-small">
-            © {new Date().getFullYear()} Medusa Store. All rights reserved.
-          </Text>
-          <MedusaCTA />
+
+        {/* Payment Methods Section */}
+        <div className="border-t border-gray-200 pt-8 pb-8">
+          <div className="text-center mb-6">
+            <h4 className="text-gray-400 text-sm font-medium uppercase tracking-wide">
+              Payments We Accept
+            </h4>
+          </div>
+          <div className="flex flex-wrap justify-center items-center gap-4">
+            {/* Payment method logos - using text placeholders, you can replace with actual logos */}
+            <div className="px-4 py-2 bg-gray-50 rounded text-xs font-semibold text-gray-600">G Pay</div>
+            <div className="px-4 py-2 bg-gray-50 rounded text-xs font-semibold text-gray-600">amazon</div>
+            <div className="px-4 py-2 bg-gray-50 rounded text-xs font-semibold text-gray-600">PayPal</div>
+            <div className="px-4 py-2 bg-gray-50 rounded text-xs font-semibold text-gray-600">Paytm</div>
+            <div className="px-4 py-2 bg-gray-50 rounded text-xs font-semibold text-gray-600">PhonePe</div>
+            <div className="px-4 py-2 bg-gray-50 rounded text-xs font-semibold text-gray-600">RuPay</div>
+            <div className="px-4 py-2 bg-gray-50 rounded text-xs font-semibold text-gray-600">MasterCard</div>
+            <div className="px-4 py-2 bg-gray-50 rounded text-xs font-semibold text-gray-600">VISA</div>
+            <div className="px-4 py-2 bg-gray-50 rounded text-xs font-semibold text-gray-600">CASH ON DELIVERY</div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-gray-200 gap-4">
+          <p className="text-sm text-gray-500">
+            Copyright © {new Date().getFullYear()} Teapoz. All rights reserved.
+          </p>
+          <div className="flex items-center gap-4">
+            {/* Social Media Icons */}
+            <a
+              href="#"
+              className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-lime-600 hover:text-white transition-colors"
+              aria-label="Facebook"
+            >
+              <FaFacebook className="text-sm" />
+            </a>
+            <a
+              href="#"
+              className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-lime-600 hover:text-white transition-colors"
+              aria-label="Twitter"
+            >
+              <FaTwitter className="text-sm" />
+            </a>
+            <a
+              href="#"
+              className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-lime-600 hover:text-white transition-colors"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedin className="text-sm" />
+            </a>
+            {/* Back to Top */}
+            <button
+              onClick={scrollToTop}
+              className="flex items-center gap-2 text-sm text-gray-600 hover:text-lime-700 transition-colors"
+            >
+              <span className="hidden md:inline">BACK TO TOP</span>
+              <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:bg-lime-600 hover:text-white transition-colors">
+                <FaChevronUp className="text-xs" />
+              </div>
+            </button>
+          </div>
         </div>
       </div>
     </footer>
