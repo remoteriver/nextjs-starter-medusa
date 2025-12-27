@@ -160,7 +160,9 @@ export default function ProductActions({
           )}
         </div>
 
-        <ProductPrice product={product} variant={selectedVariant} />
+        <div className="my-6">
+          <ProductPrice product={product} variant={selectedVariant} />
+        </div>
 
         <Button
           onClick={handleAddToCart}
@@ -172,7 +174,7 @@ export default function ProductActions({
             !isValidVariant
           }
           variant="primary"
-          className="w-full h-10"
+          className="w-full h-12 !bg-[#2c3e2e] hover:!bg-[#1f2a20] text-white font-bold uppercase tracking-wider rounded-none transition-colors"
           isLoading={isAdding}
           data-testid="add-product-button"
         >

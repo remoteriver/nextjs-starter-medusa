@@ -31,40 +31,56 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
   return (
     <>
-      <div
-        className="content-container  flex flex-col small:flex-row small:items-start py-6 relative"
-        data-testid="product-container"
-      >
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-6">
-          <ProductInfo product={product} />
+      <section className="py-12 bg-white">
+        <div className="container mx-auto px-4">
+          <div
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12"
+            data-testid="product-container"
+          >
+            {/* Image Gallery */}
+            <div className="w-full">
+              <ImageGallery images={images} />
+            </div>
+
+            {/* Product Info & Actions */}
+            <div className="flex flex-col">
+              <div className="sticky top-24">
+                <ProductInfo product={product} />
+                <div className="mt-8">
+                  <Suspense
+                    fallback={
+                      <ProductActions
+                        disabled={true}
+                        product={product}
+                        region={region}
+                      />
+                    }
+                  >
+                    <ProductActionsWrapper id={product.id} region={region} />
+                  </Suspense>
+                </div>
+                <ProductOnboardingCta />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Product Tabs */}
+      <section className="py-12 border-t border-gray-100">
+        <div className="container mx-auto px-4">
           <ProductTabs product={product} />
         </div>
-        <div className="block w-full relative">
-          <ImageGallery images={images} />
-        </div>
-        <div className="flex flex-col small:sticky small:top-48 small:py-0 small:max-w-[300px] w-full py-8 gap-y-12">
-          <ProductOnboardingCta />
-          <Suspense
-            fallback={
-              <ProductActions
-                disabled={true}
-                product={product}
-                region={region}
-              />
-            }
-          >
-            <ProductActionsWrapper id={product.id} region={region} />
+      </section>
+
+      {/* Related Products */}
+      <section className="py-24 bg-white">
+        <div className="container mx-auto px-4">
+          <Suspense fallback={<SkeletonRelatedProducts />}>
+            <RelatedProducts product={product} countryCode={countryCode} />
           </Suspense>
         </div>
-      </div>
-      <div
-        className="content-container my-16 small:my-32"
-        data-testid="related-products-container"
-      >
-        <Suspense fallback={<SkeletonRelatedProducts />}>
-          <RelatedProducts product={product} countryCode={countryCode} />
-        </Suspense>
-      </div>
+      </section>
     </>
   )
 }

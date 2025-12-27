@@ -45,20 +45,22 @@ export default function ProductCard({
 
   return (
     <div className="group">
-      <div className="relative bg-[#f9f9f9] aspect-[4/5] overflow-hidden mb-4 rounded-large">
+      <div className="relative bg-[#f9f9f9] aspect-[4/5] overflow-hidden mb-4">
         {cheapestPrice?.price_type === "sale" && (
           <span className="absolute top-3 left-3 bg-[#e57373] text-white text-[10px] font-bold px-2 py-1 z-20">
             30% OFF
           </span>
         )}
         <LocalizedClientLink href={`/products/${product.handle}`} className="block w-full h-full">
-          <Thumbnail
-            thumbnail={product.thumbnail}
-            images={product.images}
-            size="full"
-            isFeatured
-            className="!p-0 !bg-[#f9f9f9] !shadow-none !rounded-large h-full"
-          />
+          <div className="w-full h-full group-hover:scale-105 transition-transform duration-500">
+            <Thumbnail
+              thumbnail={product.thumbnail}
+              images={product.images}
+              size="full"
+              isFeatured
+              className="!p-0 !bg-[#f9f9f9] !shadow-none !rounded-none h-full"
+            />
+          </div>
         </LocalizedClientLink>
         
         {/* Hover Actions */}

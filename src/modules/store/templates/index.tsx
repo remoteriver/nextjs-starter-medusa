@@ -1,7 +1,7 @@
 import { Suspense } from "react"
 
 import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
-import RefinementList from "@modules/store/components/refinement-list"
+import ProductFilterBar from "@modules/store/components/product-filter-bar"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 
 import PaginatedProducts from "./paginated-products"
@@ -19,15 +19,17 @@ const StoreTemplate = ({
   const sort = sortBy || "created_at"
 
   return (
-    <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
-      data-testid="category-container"
-    >
-      <RefinementList sortBy={sort} />
-      <div className="w-full">
-        <div className="mb-8 text-2xl-semi">
-          <h1 data-testid="store-page-title">All products</h1>
+    <section className="py-24 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-serif font-bold text-[#2c3e2e] mb-4" data-testid="store-page-title">
+            All Products
+          </h1>
+          <p className="text-gray-500 max-w-xl mx-auto">
+            Explore our complete collection of premium teas, carefully curated for your enjoyment.
+          </p>
         </div>
+        <ProductFilterBar sortBy={sort} />
         <Suspense fallback={<SkeletonProductGrid />}>
           <PaginatedProducts
             sortBy={sort}
@@ -36,7 +38,7 @@ const StoreTemplate = ({
           />
         </Suspense>
       </div>
-    </div>
+    </section>
   )
 }
 
