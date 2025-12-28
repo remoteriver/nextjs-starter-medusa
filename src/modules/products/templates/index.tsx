@@ -59,17 +59,13 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                     <ProductActionsWrapper id={product.id} region={region} />
                   </Suspense>
                 </div>
+                <div className="mt-8">
+                  <ProductTabs product={product} />
+                </div>
                 <ProductOnboardingCta />
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* Product Tabs */}
-      <section className="py-12 border-t border-gray-100">
-        <div className="container mx-auto px-4">
-          <ProductTabs product={product} />
         </div>
       </section>
 

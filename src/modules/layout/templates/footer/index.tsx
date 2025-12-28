@@ -12,7 +12,7 @@ export default function Footer() {
     <footer className="bg-white border-t border-gray-200 w-full">
       <div className="container mx-auto px-4 py-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           {/* Logo */}
           <div>
             <LocalizedClientLink
