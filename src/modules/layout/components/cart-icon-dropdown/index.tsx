@@ -15,7 +15,7 @@ import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Thumbnail from "@modules/products/components/thumbnail"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { Fragment, useEffect, useRef, useState } from "react"
 
 const CartIconDropdown = ({
@@ -64,6 +64,7 @@ const CartIconDropdown = ({
   }, [activeTimer])
 
   const pathname = usePathname()
+  const router = useRouter()
 
   useEffect(() => {
     if (itemRef.current !== totalItems && !pathname.includes("/cart")) {
@@ -72,6 +73,10 @@ const CartIconDropdown = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalItems, itemRef.current])
 
+  const handleCartClick = () => {
+    router.push("/cart")
+  }
+
   return (
     <div
       className="relative z-50"
@@ -79,7 +84,7 @@ const CartIconDropdown = ({
       onMouseLeave={close}
     >
       <Popover className="relative">
-        <PopoverButton className="relative">
+        <PopoverButton className="relative" onClick={handleCartClick}>
           <FaBagShopping className="text-lg" />
           <span className="absolute -top-2 -right-2 bg-lime-600 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
             {totalItems}
@@ -129,7 +134,7 @@ const CartIconDropdown = ({
                         <div className="flex flex-col justify-between flex-1">
                           <div className="flex flex-col flex-1">
                             <div className="flex items-start justify-between">
-                              <div className="flex flex-col overflow-ellipsis whitespace-nowrap mr-4 w-[180px]">
+                              <div className="flex flex-col overflow-ellipsis whitespace-nowrap w-[180px]">
                                 <h3 className="text-base-regular overflow-hidden text-ellipsis">
                                   <LocalizedClientLink
                                     href={`/products/${item.product_handle}`}

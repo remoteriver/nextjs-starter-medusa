@@ -39,14 +39,35 @@ export default function ProductActions({
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
   const countryCode = useParams().countryCode as string
+  const hasInitializedRef = useRef(false)
 
-  // If there is only 1 variant, preselect the options
+  // Select the default variant (first variant) when product page loads
   useEffect(() => {
-    if (product.variants?.length === 1) {
-      const variantOptions = optionsAsKeymap(product.variants[0].options)
-      setOptions(variantOptions ?? {})
+    if (hasInitializedRef.current || !product.variants?.length) {
+      return
     }
-  }, [product.variants])
+
+    // Check if there's a variant ID in the URL query params
+    const variantIdFromUrl = searchParams.get("v_id")
+    
+    if (variantIdFromUrl) {
+      const variant = product.variants.find((v) => v.id === variantIdFromUrl)
+      if (variant) {
+        const variantOptions = optionsAsKeymap(variant.options)
+        setOptions(variantOptions ?? {})
+        hasInitializedRef.current = true
+        return
+      }
+    }
+
+    // Otherwise, select the first variant by default
+    const firstVariant = product.variants[0]
+    if (firstVariant) {
+      const variantOptions = optionsAsKeymap(firstVariant.options)
+      setOptions(variantOptions ?? {})
+      hasInitializedRef.current = true
+    }
+  }, [product.variants, searchParams])
 
   const selectedVariant = useMemo(() => {
     if (!product.variants || product.variants.length === 0) {
