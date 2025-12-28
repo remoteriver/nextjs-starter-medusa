@@ -135,30 +135,65 @@ export default function ProductActions({
     setIsAdding(false)
   }
 
+  // Filter options and their values to only show those that exist in at least one variant
+  const availableOptions = useMemo(() => {
+    if (!product.options || !product.variants?.length) {
+      return []
+    }
+
+    // Create a map of option_id -> Set of values that exist in variants
+    const optionValuesInVariants = new Map<string, Set<string>>()
+    product.variants.forEach((variant) => {
+      variant.options?.forEach((variantOption) => {
+        if (variantOption.option_id && variantOption.value) {
+          if (!optionValuesInVariants.has(variantOption.option_id)) {
+            optionValuesInVariants.set(variantOption.option_id, new Set<string>())
+          }
+          optionValuesInVariants.get(variantOption.option_id)?.add(variantOption.value)
+        }
+      })
+    })
+
+    // Filter product options to only include those that exist in variants
+    // and filter their values to only include those that exist in variants
+    return product.options
+      .filter((option) => optionValuesInVariants.has(option.id))
+      .map((option) => {
+        const availableValues = optionValuesInVariants.get(option.id) || new Set<string>()
+        // Filter option.values to only include values that exist in variants
+        const filteredValues = (option.values || []).filter((val) =>
+          availableValues.has(val.value)
+        )
+        return {
+          ...option,
+          values: filteredValues,
+        }
+      })
+  }, [product.options, product.variants])
+
+
   return (
     <>
       <div className="flex flex-col gap-y-2" ref={actionsRef}>
-        <div>
-          {(product.variants?.length ?? 0) > 1 && (
-            <div className="flex flex-col gap-y-4">
-              {(product.options || []).map((option) => {
-                return (
-                  <div key={option.id}>
-                    <OptionSelect
-                      option={option}
-                      current={options[option.id]}
-                      updateOption={setOptionValue}
-                      title={option.title ?? ""}
-                      data-testid="product-options"
-                      disabled={!!disabled || isAdding}
-                    />
-                  </div>
-                )
-              })}
-              <Divider />
-            </div>
-          )}
-        </div>
+        {availableOptions.length > 0 && (
+          <div className="flex flex-col gap-y-4 mb-6">
+            {availableOptions.map((option) => {
+              return (
+                <div key={option.id}>
+                  <OptionSelect
+                    option={option}
+                    current={options[option.id]}
+                    updateOption={setOptionValue}
+                    title={option.title ?? ""}
+                    data-testid="product-options"
+                    disabled={!!disabled || isAdding}
+                  />
+                </div>
+              )
+            })}
+            <Divider />
+          </div>
+        )}
 
         <div className="my-6">
           <ProductPrice product={product} variant={selectedVariant} />
