@@ -60,7 +60,7 @@ export default function Nav() {
         {/* Navigation */}
         <div className="border-t border-gray-200">
           <nav className="container mx-auto px-4 flex justify-center items-center gap-10 py-6 text-sm font-medium uppercase tracking-wide text-gray-600">
-            <LocalizedClientLink href="/" className="text-lime-700 hover:text-lime-800">
+            <LocalizedClientLink href="/" className="hover:text-lime-700 transition-colors">
               Home
             </LocalizedClientLink>
             <LocalizedClientLink href="/store" className="hover:text-lime-700 transition-colors">

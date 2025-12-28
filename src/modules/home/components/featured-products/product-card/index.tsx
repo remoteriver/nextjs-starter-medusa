@@ -1,6 +1,6 @@
 "use client"
 
-import { FaCartPlus, FaRegHeart, FaMagnifyingGlass, FaBagShopping, FaStar, FaStarHalfStroke, FaRegStar } from "react-icons/fa6"
+import { FaBagShopping, FaStar, FaStarHalfStroke, FaRegStar } from "react-icons/fa6"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Thumbnail from "@modules/products/components/thumbnail"
@@ -35,8 +35,8 @@ export default function ProductCard({
     setIsAdding(false)
   }
 
+  const displayPrice = cheapestPrice?.calculated_price
   const originalPrice = cheapestPrice?.price_type === "sale" ? cheapestPrice.original_price : null
-  const salePrice = cheapestPrice?.calculated_price
 
   // Generate random rating (you can replace this with actual product rating data)
   const rating = 4.5
@@ -44,7 +44,7 @@ export default function ProductCard({
   const hasHalfStar = rating % 1 >= 0.5
 
   return (
-    <div className="group">
+    <div className="group bg-[#f7f7f7] p-4">
       <div className="relative bg-[#f9f9f9] aspect-[4/5] overflow-hidden mb-4">
         {cheapestPrice?.price_type === "sale" && (
           <span className="absolute top-3 left-3 bg-[#e57373] text-white text-[10px] font-bold px-2 py-1 z-20">
@@ -62,28 +62,6 @@ export default function ProductCard({
             />
           </div>
         </LocalizedClientLink>
-        
-        {/* Hover Actions */}
-        <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0 transition-all duration-300">
-          <button
-            onClick={handleAddToCart}
-            disabled={isAdding}
-            className="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-lime-600 hover:text-white transition-colors"
-            title="Add to cart"
-          >
-            <FaCartPlus />
-          </button>
-          <button className="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-lime-600 hover:text-white transition-colors" title="Add to wishlist">
-            <FaRegHeart />
-          </button>
-          <LocalizedClientLink
-            href={`/products/${product.handle}`}
-            className="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:bg-lime-600 hover:text-white transition-colors"
-            title="Quick view"
-          >
-            <FaMagnifyingGlass />
-          </LocalizedClientLink>
-        </div>
       </div>
       <div className="text-left">
         <div className="flex text-yellow-400 text-xs mb-2">
@@ -102,24 +80,28 @@ export default function ProductCard({
         </LocalizedClientLink>
         <div className="flex justify-between items-center">
           <div className="text-sm font-medium text-gray-500">
-            {originalPrice && (
-              <span className="line-through text-gray-300 mr-2">
-                {originalPrice}
-              </span>
-            )}
-            {salePrice && (
-              <span>
-                {salePrice}
-              </span>
+            {displayPrice ? (
+              <>
+                {originalPrice && (
+                  <span className="line-through text-gray-300 mr-2">
+                    {originalPrice}
+                  </span>
+                )}
+                <span>
+                  {displayPrice}
+                </span>
+              </>
+            ) : (
+              <span className="text-gray-400">Price unavailable</span>
             )}
           </div>
           <button
             onClick={handleAddToCart}
             disabled={isAdding}
-            className="text-gray-400 hover:text-lime-700"
+            className="w-8 h-8 rounded-full flex items-center justify-center text-gray-400 group-hover:bg-lime-600 group-hover:text-white transition-colors"
             title="Add to cart"
           >
-            <FaBagShopping />
+            <FaBagShopping className="text-sm" />
           </button>
         </div>
       </div>
