@@ -1,5 +1,5 @@
 import { Suspense } from "react"
-import { FaChevronDown, FaMagnifyingGlass, FaRegUser, FaRegHeart, FaBagShopping } from "react-icons/fa6"
+import { FaMagnifyingGlass, FaRegUser, FaRegHeart, FaBagShopping } from "react-icons/fa6"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
 
@@ -21,7 +21,7 @@ export default function Nav() {
             <div className="flex-1 text-center">
               <LocalizedClientLink
                 href="/"
-                className="text-4xl font-serif font-bold text-[#2c3e2e] tracking-tight"
+                className="text-4xl font-bold text-[#2c3e2e] tracking-tight"
               >
                 teapoz<span className="text-lime-600">.</span>
               </LocalizedClientLink>
@@ -55,21 +55,23 @@ export default function Nav() {
               </div>
             </div>
           </div>
+        </div>
 
-          {/* Navigation */}
-          <nav className="flex justify-center gap-10 mt-6 text-sm font-medium uppercase tracking-wide text-gray-600">
+        {/* Navigation */}
+        <div className="border-t border-gray-200">
+          <nav className="container mx-auto px-4 flex justify-center items-center gap-10 py-6 text-sm font-medium uppercase tracking-wide text-gray-600">
             <LocalizedClientLink href="/" className="text-lime-700 hover:text-lime-800">
-              Home <FaChevronDown className="inline text-[10px] ml-1" />
+              Home
             </LocalizedClientLink>
             <LocalizedClientLink href="/store" className="hover:text-lime-700 transition-colors">
-              Shop <FaChevronDown className="inline text-[10px] ml-1" />
+              Shop
             </LocalizedClientLink>
             <LocalizedClientLink href="/store" className="hover:text-lime-700 transition-colors">Sale</LocalizedClientLink>
             <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
-              Blog <FaChevronDown className="inline text-[10px] ml-1" />
+              Blog
             </LocalizedClientLink>
             <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">
-              Pages <FaChevronDown className="inline text-[10px] ml-1" />
+              Pages
             </LocalizedClientLink>
             <LocalizedClientLink href="#" className="hover:text-lime-700 transition-colors">Contact</LocalizedClientLink>
           </nav>

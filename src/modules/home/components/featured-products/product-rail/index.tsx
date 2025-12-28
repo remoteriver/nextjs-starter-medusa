@@ -29,7 +29,7 @@ export default async function ProductRail({
     <section className="py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-serif font-bold text-[#2c3e2e] mb-4">
+          <h2 className="text-4xl font-bold text-[#2c3e2e] mb-4">
             Featured Products
           </h2>
           <p className="text-gray-500 max-w-xl mx-auto">

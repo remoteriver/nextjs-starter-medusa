@@ -22,7 +22,7 @@ const StoreTemplate = ({
     <section className="py-24 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-serif font-bold text-[#2c3e2e] mb-4" data-testid="store-page-title">
+          <h1 className="text-4xl font-bold text-[#2c3e2e] mb-4" data-testid="store-page-title">
             All Products
           </h1>
           <p className="text-gray-500 max-w-xl mx-auto">

@@ -32,8 +32,8 @@ const features = [
 
 export default function Features() {
   return (
-    <section className="py-16 border-b border-gray-100">
-      <div className="container mx-auto px-4">
+    <section className="border-b border-gray-100">
+      <div className="container mx-auto px-4 py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
           {features.map((feature, index) => {
             const IconComponent = feature.icon
@@ -45,7 +45,7 @@ export default function Features() {
                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-2">
                   {feature.label}
                 </span>
-                <h4 className="text-xl font-serif font-bold text-[#2c3e2e] mb-3">
+                <h4 className="text-xl font-bold text-[#2c3e2e] mb-3">
                   {feature.title}
                 </h4>
                 <p className="text-gray-500 text-sm leading-relaxed max-w-xs">

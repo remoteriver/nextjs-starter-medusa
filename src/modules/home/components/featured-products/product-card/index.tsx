@@ -96,7 +96,7 @@ export default function ProductCard({
           ))}
         </div>
         <LocalizedClientLink href={`/products/${product.handle}`}>
-          <h3 className="font-serif font-bold text-[#2c3e2e] text-lg mb-1 group-hover:text-lime-700 transition-colors cursor-pointer">
+          <h3 className="font-bold text-[#2c3e2e] text-lg mb-1 group-hover:text-lime-700 transition-colors cursor-pointer">
             {product.title}
           </h3>
         </LocalizedClientLink>

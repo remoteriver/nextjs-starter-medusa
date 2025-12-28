@@ -148,9 +148,11 @@ export default function Footer() {
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Payment Methods Section */}
-        <div className="border-t border-gray-200 pt-8 pb-8">
+      {/* Payment Methods Section */}
+      <div className="hidden border-t border-gray-200">
+        <div className="container mx-auto px-4 pt-8 pb-8">
           <div className="text-center mb-6">
             <h4 className="text-gray-400 text-sm font-medium uppercase tracking-wide">
               Payments We Accept
@@ -169,45 +171,49 @@ export default function Footer() {
             <div className="px-4 py-2 bg-gray-50 rounded text-xs font-semibold text-gray-600">CASH ON DELIVERY</div>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-gray-200 gap-4">
-          <p className="text-sm text-gray-500">
-            Copyright © {new Date().getFullYear()} Teapoz. All rights reserved.
-          </p>
-          <div className="flex items-center gap-4">
-            {/* Social Media Icons */}
-            <a
-              href="#"
-              className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-lime-600 hover:text-white transition-colors"
-              aria-label="Facebook"
-            >
-              <FaFacebook className="text-sm" />
-            </a>
-            <a
-              href="#"
-              className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-lime-600 hover:text-white transition-colors"
-              aria-label="Twitter"
-            >
-              <FaTwitter className="text-sm" />
-            </a>
-            <a
-              href="#"
-              className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-lime-600 hover:text-white transition-colors"
-              aria-label="LinkedIn"
-            >
-              <FaLinkedin className="text-sm" />
-            </a>
-            {/* Back to Top */}
-            <button
-              onClick={scrollToTop}
-              className="flex items-center gap-2 text-sm text-gray-600 hover:text-lime-700 transition-colors"
-            >
-              <span className="hidden md:inline">BACK TO TOP</span>
-              <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:bg-lime-600 hover:text-white transition-colors">
-                <FaChevronUp className="text-xs" />
-              </div>
-            </button>
+      {/* Bottom Bar */}
+      <div className="border-t border-gray-200">
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <p className="text-sm text-gray-500">
+              Copyright © {new Date().getFullYear()} Teapoz. All rights reserved.
+            </p>
+            <div className="flex items-center gap-4">
+              {/* Social Media Icons */}
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-lime-600 hover:text-white transition-colors"
+                aria-label="Facebook"
+              >
+                <FaFacebook className="text-sm" />
+              </a>
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-lime-600 hover:text-white transition-colors"
+                aria-label="Twitter"
+              >
+                <FaTwitter className="text-sm" />
+              </a>
+              <a
+                href="#"
+                className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 hover:bg-lime-600 hover:text-white transition-colors"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin className="text-sm" />
+              </a>
+              {/* Back to Top */}
+              <button
+                onClick={scrollToTop}
+                className="flex items-center gap-2 text-sm text-gray-600 hover:text-lime-700 transition-colors"
+              >
+                <span className="hidden md:inline">BACK TO TOP</span>
+                <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:bg-lime-600 hover:text-white transition-colors">
+                  <FaChevronUp className="text-xs" />
+                </div>
+              </button>
+            </div>
           </div>
         </div>
       </div>

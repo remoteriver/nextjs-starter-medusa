@@ -49,7 +49,7 @@ export default function Categories() {
                 <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider">
                   {category.label}
                 </span>
-                <h3 className="text-2xl font-serif font-bold text-[#2c3e2e] mt-1 mb-4">
+                <h3 className="text-2xl font-bold text-[#2c3e2e] mt-1 mb-4">
                   {category.title}
                 </h3>
                 <LocalizedClientLink

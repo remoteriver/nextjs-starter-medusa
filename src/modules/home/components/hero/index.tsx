@@ -25,7 +25,7 @@ const Hero = () => {
           <span className="text-lime-700 font-bold tracking-widest text-xs uppercase mb-4 block">
             Our Specialty
           </span>
-          <h1 className="text-6xl md:text-7xl font-serif font-bold text-[#2c3e2e] leading-[1.1] mb-6">
+          <h1 className="text-6xl md:text-7xl font-bold text-[#2c3e2e] leading-[1.1] mb-6">
             Greek <br />
             <span className="text-lime-700">Mountain Tea</span>
           </h1>
@@ -34,7 +34,7 @@ const Hero = () => {
           </p>
           <LocalizedClientLink
             href="/store"
-            className="inline-flex items-center gap-2 bg-white border border-gray-200 text-[#2c3e2e] px-8 py-4 text-sm font-bold uppercase tracking-wider hover:bg-[#2c3e2e] hover:text-white hover:border-[#2c3e2e] transition-all duration-300 shadow-sm"
+            className="inline-flex items-center gap-2 bg-white border border-gray-200 text-[#2c3e2e] px-8 py-4 text-sm font-bold tracking-wider hover:bg-[#2c3e2e] hover:text-white hover:border-[#2c3e2e] transition-all duration-300 shadow-sm"
           >
             Shop Our Teas <FaChevronRight className="text-xs" />
           </LocalizedClientLink>

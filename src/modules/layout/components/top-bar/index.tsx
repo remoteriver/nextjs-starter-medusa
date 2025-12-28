@@ -5,7 +5,7 @@ import LocalizedClientLink from "@modules/common/components/localized-client-lin
 
 export default function TopBar() {
   return (
-    <div className="bg-[#2c3e2e] text-white text-xs py-2.5 border-b border-white/10">
+    <div className="bg-[#4d7c0f] text-white text-xs py-2.5 border-b border-white/10">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="hidden md:block opacity-90">
           Standard Flat Rate Shipping $7.95 - Free Shipping on orders of $50 or more!{" "}
