@@ -84,7 +84,7 @@ const CartIconDropdown = ({
       onMouseLeave={close}
     >
       <Popover className="relative">
-        <PopoverButton className="relative" onClick={handleCartClick}>
+        <PopoverButton className="relative flex items-center" onClick={handleCartClick}>
           <FaBagShopping className="text-lg" />
           <span className="absolute -top-2 -right-2 bg-lime-600 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">
             {totalItems}

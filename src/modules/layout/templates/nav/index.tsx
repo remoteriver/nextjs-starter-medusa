@@ -2,6 +2,7 @@ import { Suspense } from "react"
 import { FaMagnifyingGlass, FaRegUser, FaRegHeart, FaBagShopping } from "react-icons/fa6"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import CartButton from "@modules/layout/components/cart-button"
+import UserMenu from "@modules/layout/components/user-menu"
 
 export default function Nav() {
   return (
@@ -29,23 +30,27 @@ export default function Nav() {
 
             {/* Actions */}
             <div className="w-1/4 flex justify-end items-center gap-6">
-              <LocalizedClientLink
-                href="/account"
-                className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-lime-700 transition-colors"
-              >
-                <FaRegUser className="text-lg" />
-                <span className="hidden lg:inline">Login / Register</span>
-              </LocalizedClientLink>
+              <Suspense fallback={
+                <LocalizedClientLink
+                  href="/account"
+                  className="flex items-center gap-2 text-sm font-medium text-gray-600 hover:text-lime-700 transition-colors"
+                >
+                  <FaRegUser className="text-lg" />
+                  <span className="hidden lg:inline">Login / Register</span>
+                </LocalizedClientLink>
+              }>
+                <UserMenu />
+              </Suspense>
               <LocalizedClientLink
                 href="#"
-                className="text-gray-600 hover:text-lime-700 transition-colors relative"
+                className="flex items-center text-gray-600 hover:text-lime-700 transition-colors relative"
               >
                 <FaRegHeart className="text-lg" />
                 <span className="absolute -top-2 -right-2 bg-lime-600 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">0</span>
               </LocalizedClientLink>
-              <div className="text-gray-600 hover:text-lime-700 transition-colors">
+              <div className="flex items-center text-gray-600 hover:text-lime-700 transition-colors">
                 <Suspense fallback={
-                  <LocalizedClientLink href="/cart" className="relative">
+                  <LocalizedClientLink href="/cart" className="relative flex items-center">
                     <FaBagShopping className="text-lg" />
                     <span className="absolute -top-2 -right-2 bg-lime-600 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full">0</span>
                   </LocalizedClientLink>

@@ -1,4 +1,4 @@
-import { Heading } from "@medusajs/ui"
+import { Heading, Button } from "@medusajs/ui"
 import { cookies as nextCookies } from "next/headers"
 
 import CartTotals from "@modules/common/components/cart-totals"
@@ -8,6 +8,7 @@ import OnboardingCta from "@modules/order/components/onboarding-cta"
 import OrderDetails from "@modules/order/components/order-details"
 import ShippingDetails from "@modules/order/components/shipping-details"
 import PaymentDetails from "@modules/order/components/payment-details"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { HttpTypes } from "@medusajs/types"
 
 type OrderCompletedTemplateProps = {
@@ -45,6 +46,13 @@ export default async function OrderCompletedTemplate({
           <ShippingDetails order={order} />
           <PaymentDetails order={order} />
           <Help />
+          <div className="flex justify-center mt-8">
+            <LocalizedClientLink href="/">
+              <Button className="!bg-[#2c3e2e] hover:!bg-[#1f2a20] text-white font-bold uppercase tracking-wider rounded-none transition-colors px-8 py-3">
+                Return to Home
+              </Button>
+            </LocalizedClientLink>
+          </div>
         </div>
       </div>
     </div>
